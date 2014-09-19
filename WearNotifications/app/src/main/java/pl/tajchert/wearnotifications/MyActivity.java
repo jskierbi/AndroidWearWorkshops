@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MyActivity extends Activity {
@@ -12,6 +14,40 @@ public class MyActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+
+        Button buttonStartNotifBasic;
+        Button buttonStartNotifPages;
+        Button buttonStartNotifAction;
+        Button buttonStartNotifBackground;
+
+        buttonStartNotifBasic = (Button) findViewById(R.id.buttonNotifyKittenzBasic);
+        buttonStartNotifBasic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Tutaj będziemy wysłać podstawowe powiadomienie
+            }
+        });
+        buttonStartNotifBackground = (Button) findViewById(R.id.buttonNotifyKittenzBackground);
+        buttonStartNotifBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Tutaj będziemy wysłać powiadomienie z tłem
+            }
+        });
+        buttonStartNotifAction = (Button) findViewById(R.id.buttonNotifyKittenzAction);
+        buttonStartNotifAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Tutaj będziemy wysłać powiadomienie z akcją
+            }
+        });
+        buttonStartNotifPages = (Button) findViewById(R.id.buttonNotifyKittenzPages);
+        buttonStartNotifPages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Tutaj będziemy wysłać powiadomienie z stronami
+            }
+        });
     }
 
 

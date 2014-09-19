@@ -9,8 +9,39 @@
     tools:context=".MyActivity">
 
     <TextView
-        android:text="@string/hello_world"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/button_title_top"
+        android:id="@+id/titleNotification"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleNotification"
+        android:id="@+id/buttonNotifyKittenzBasic"
+        android:text="@string/button_title_basic_action" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonNotifyKittenzBasic"
+        android:id="@+id/buttonNotifyKittenzBackground"
+        android:text="@string/button_title_graphic_action" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonNotifyKittenzBackground"
+        android:id="@+id/buttonNotifyKittenzAction"
+        android:text="@string/button_title_action_action" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonNotifyKittenzAction"
+        android:id="@+id/buttonNotifyKittenzPages"
+        android:text="@string/button_title_action_pages" />
 
 </RelativeLayout>

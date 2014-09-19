@@ -2,7 +2,12 @@
 <resources>
 
     <string name="app_name">Wear Notifications</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <!-- Activity to send notification content -->
+    <string name="button_title_basic_action">Podstawowe</string>
+    <string name="button_title_top">Rodzaj powiadomienia</string>
+    <string name="button_title_graphic_action">Z tłem</string>
+    <string name="button_title_action_action">Z akcjami</string>
+    <string name="button_title_action_pages">Z stronami</string>
 
 </resources>
