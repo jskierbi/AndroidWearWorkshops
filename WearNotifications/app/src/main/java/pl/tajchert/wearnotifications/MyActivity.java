@@ -3,6 +3,7 @@ package pl.tajchert.wearnotifications;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -29,17 +30,7 @@ public class MyActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //Tutaj będziemy wysłać podstawowe powiadomienie
-                Intent viewIntent = new Intent(MyActivity.this, MyActivity.class);
-                PendingIntent viewPendingIntent = PendingIntent.getActivity(MyActivity.this, 0, viewIntent, 0);
-
-                NotificationCompat.Builder notificationBuilder =
-                        new NotificationCompat.Builder(MyActivity.this)
-                                .setSmallIcon(R.drawable.ic_launcher)
-                                .setContentTitle("Kittenz!")
-                                .setContentText("Cute kittenz are cute!")
-                                .setContentIntent(viewPendingIntent);
-                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MyActivity.this);
-                notificationManager.notify(999, notificationBuilder.build());
+                showNotificationSimple();
             }
         });
         buttonStartNotifBackground = (Button) findViewById(R.id.buttonNotifyKittenzBackground);
@@ -47,6 +38,7 @@ public class MyActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //Tutaj będziemy wysłać powiadomienie z tłem
+                showNotificationWithBackground();
             }
         });
         buttonStartNotifAction = (Button) findViewById(R.id.buttonNotifyKittenzAction);
@@ -63,6 +55,39 @@ public class MyActivity extends Activity {
                 //Tutaj będziemy wysłać powiadomienie z stronami
             }
         });
+    }
+
+    private void showNotificationSimple(){
+        Intent viewIntent = new Intent(MyActivity.this, MyActivity.class);
+        PendingIntent viewPendingIntent = PendingIntent.getActivity(MyActivity.this, 0, viewIntent, 0);
+
+        NotificationCompat.Builder notificationBuilder =
+                new NotificationCompat.Builder(MyActivity.this)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle("Kittenz!")
+                        .setContentText("Cute kittenz are cute!")
+                        .setContentIntent(viewPendingIntent);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MyActivity.this);
+        notificationManager.notify(999, notificationBuilder.build());
+    }
+
+    private void showNotificationWithBackground(){
+        Intent viewIntent = new Intent(MyActivity.this, MyActivity.class);
+        PendingIntent viewPendingIntent = PendingIntent.getActivity(MyActivity.this, 0, viewIntent, 0);
+
+        NotificationCompat.BigTextStyle bigStyle = new NotificationCompat.BigTextStyle();
+        bigStyle.bigText("Cute kittenz are cute! Cute kittenz are cute! Cute kittenz are cute! Cute kittenz are cute! Cute kittenz are cute!");
+
+        NotificationCompat.Builder notificationBuilder =
+                new NotificationCompat.Builder(MyActivity.this)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle("Kittenz!")
+                        .setContentIntent(viewPendingIntent)
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.background))
+                        .setStyle(bigStyle);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MyActivity.this);
+        notificationManager.notify(999, notificationBuilder.build());
     }
 
 
