@@ -46,6 +46,7 @@ public class MyActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //Tutaj będziemy wysłać powiadomienie z akcją
+                showNotificationAction();
             }
         });
         buttonStartNotifPages = (Button) findViewById(R.id.buttonNotifyKittenzPages);
@@ -95,6 +96,21 @@ public class MyActivity extends Activity {
         notificationManager.notify(998, notificationBuilder.build());
     }
 
+    private void showNotificationAction(){
+        Intent actionIntent = new Intent(MyActivity.this, MyActivity.class);
+        PendingIntent actionPendingIntent = PendingIntent.getActivity(MyActivity.this, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationCompat.Action action =
+                new NotificationCompat.Action.Builder(R.drawable.ic_launcher, "Show our app", actionPendingIntent)
+                        .build();
+        NotificationCompat.Builder notificationBuilder =
+                new NotificationCompat.Builder(MyActivity.this)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle("Meow!")
+                        .addAction(action);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MyActivity.this);
+        notificationManager.notify(997, notificationBuilder.build());
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
