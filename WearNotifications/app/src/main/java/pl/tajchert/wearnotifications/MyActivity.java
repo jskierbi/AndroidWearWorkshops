@@ -7,18 +7,26 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.app.RemoteInput;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 public class MyActivity extends Activity {
+    private final static String EXTRA_VOICE_REPLY = "extra_voice_reply";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+
+        CharSequence replay = getMessageText(getIntent()).toString();
+        if(replay!= null && replay.toString().length() > 0){
+            Toast.makeText(getApplicationContext(), replay.toString(), Toast.LENGTH_LONG).show();
+        }
 
         Button buttonStartNotifBasic;
         Button buttonStartNotifPages;
@@ -46,7 +54,8 @@ public class MyActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //Tutaj będziemy wysłać powiadomienie z akcją
-                showNotificationAction();
+                //showNotificationAction();
+                showNotificationVoiceInput();
             }
         });
         buttonStartNotifPages = (Button) findViewById(R.id.buttonNotifyKittenzPages);
@@ -110,6 +119,36 @@ public class MyActivity extends Activity {
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MyActivity.this);
         notificationManager.notify(997, notificationBuilder.build());
+    }
+
+    private void showNotificationVoiceInput(){
+        Intent replyIntent = new Intent(MyActivity.this, MyActivity.class);
+        PendingIntent replyPendingIntent =
+                PendingIntent.getActivity(this, 0, replyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        RemoteInput remoteInput = new RemoteInput.Builder(EXTRA_VOICE_REPLY)
+                .setLabel("Meow once")
+                .build();
+        NotificationCompat.Action action =
+                new NotificationCompat.Action.Builder(R.drawable.ic_launcher,
+                        "Speak to our app", replyPendingIntent)
+                        .addRemoteInput(remoteInput)
+                        .build();
+        NotificationCompat.Builder notificationBuilder =
+                new NotificationCompat.Builder(MyActivity.this)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle("Meow request!")
+                        .addAction(action);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MyActivity.this);
+        notificationManager.notify(996, notificationBuilder.build());
+    }
+
+    private CharSequence getMessageText(Intent intent) {
+        Bundle remoteInput = RemoteInput.getResultsFromIntent(intent);
+        if (remoteInput != null) {
+            return remoteInput.getCharSequence(EXTRA_VOICE_REPLY);
+        }
+        return "";
     }
 
     @Override
