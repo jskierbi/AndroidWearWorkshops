@@ -78,16 +78,21 @@ public class MyActivity extends Activity {
         NotificationCompat.BigTextStyle bigStyle = new NotificationCompat.BigTextStyle();
         bigStyle.bigText("Cute kittenz are cute! Cute kittenz are cute! Cute kittenz are cute! Cute kittenz are cute! Cute kittenz are cute!");
 
+        NotificationCompat.WearableExtender wearableExtender =
+                new NotificationCompat.WearableExtender()
+                        .setHintHideIcon(true)
+                        .setBackground(BitmapFactory.decodeResource(getResources(), R.drawable.background));
+
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(MyActivity.this)
                         .setSmallIcon(R.drawable.ic_launcher)
                         .setContentTitle("Kittenz!")
                         .setContentIntent(viewPendingIntent)
-                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.background))
+                        .extend(wearableExtender)
                         .setStyle(bigStyle);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MyActivity.this);
-        notificationManager.notify(999, notificationBuilder.build());
+        notificationManager.notify(998, notificationBuilder.build());
     }
 
 
