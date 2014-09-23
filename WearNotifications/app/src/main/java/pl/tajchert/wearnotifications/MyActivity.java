@@ -1,7 +1,11 @@
 package pl.tajchert.wearnotifications;
 
 import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +29,17 @@ public class MyActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //Tutaj będziemy wysłać podstawowe powiadomienie
+                Intent viewIntent = new Intent(MyActivity.this, MyActivity.class);
+                PendingIntent viewPendingIntent = PendingIntent.getActivity(MyActivity.this, 0, viewIntent, 0);
+
+                NotificationCompat.Builder notificationBuilder =
+                        new NotificationCompat.Builder(MyActivity.this)
+                                .setSmallIcon(R.drawable.ic_launcher)
+                                .setContentTitle("Kittenz!")
+                                .setContentText("Cute kittenz are cute!")
+                                .setContentIntent(viewPendingIntent);
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MyActivity.this);
+                notificationManager.notify(999, notificationBuilder.build());
             }
         });
         buttonStartNotifBackground = (Button) findViewById(R.id.buttonNotifyKittenzBackground);
