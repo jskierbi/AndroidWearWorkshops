@@ -1,6 +1,7 @@
 package pl.tajchert.wearnotifications;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -63,6 +64,7 @@ public class MyActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //Tutaj będziemy wysłać powiadomienie z stronami
+                showNotificationPages();
             }
         });
     }
@@ -149,6 +151,36 @@ public class MyActivity extends Activity {
             return remoteInput.getCharSequence(EXTRA_VOICE_REPLY);
         }
         return "";
+    }
+
+    private void showNotificationPages(){
+        NotificationCompat.Builder notificationBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle("Meow!")
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.background_two))
+                        .setContentText("Can I haz cheezburger?");
+        //Uzywamy BigTextStyle jako ze najczesciej bedziemy umieszczac duzo tekstu w tym miejscu
+        NotificationCompat.BigTextStyle secondPageStyle = new NotificationCompat.BigTextStyle();
+        secondPageStyle.setBigContentTitle("A cheezburger recipe:").bigText("Just order a cheezburger.");
+
+        // dodanie drugiej strony
+        Notification secondPageNotification =
+                new NotificationCompat.Builder(this)
+                        .setStyle(secondPageStyle)
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.background))
+                        .build();
+
+        // stworzenie finalnego powiadomienia, ktore bazuje na pierwszym (notificationBuilder, w ktorym mozemy zdefinowac np. setContentIntent())
+        // z dodatkowymi  stronami (2 jest powtorzona dwa razy aby pokazac jak dodawac wiecej stron).
+        Notification twoPageNotification =
+                new NotificationCompat.WearableExtender()
+                        .addPage(secondPageNotification)
+                        .addPage(secondPageNotification)
+                        .extend(notificationBuilder)
+                        .build();
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(995, twoPageNotification);
     }
 
     @Override
