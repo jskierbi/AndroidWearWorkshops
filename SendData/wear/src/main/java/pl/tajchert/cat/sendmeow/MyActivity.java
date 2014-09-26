@@ -3,9 +3,13 @@ package pl.tajchert.cat.sendmeow;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
+import android.util.Log;
 import android.widget.TextView;
 
+import pl.tajchert.cat.meow.Tools;
+
 public class MyActivity extends Activity {
+    private static final String TAG = "MyActivity";
 
     private TextView mTextView;
 
@@ -20,5 +24,6 @@ public class MyActivity extends Activity {
                 mTextView = (TextView) stub.findViewById(R.id.text);
             }
         });
+        Log.d(TAG, "Wear, meow constant is:" + Tools.MEOW);
     }
 }

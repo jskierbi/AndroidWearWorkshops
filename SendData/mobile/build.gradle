@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "pl.tajchert.cat.sendmeow"
-        minSdkVersion 14
+        minSdkVersion 18
         targetSdkVersion 20
         versionCode 1
         versionName "1.0"
@@ -22,5 +22,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     wearApp project(':wear')
+    compile project(':common')
     compile 'com.google.android.gms:play-services:+'
 }

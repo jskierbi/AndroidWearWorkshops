@@ -2,16 +2,21 @@ package pl.tajchert.cat.sendmeow;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import pl.tajchert.cat.meow.Tools;
+
 
 public class MyActivity extends Activity {
+    private static final String TAG = "MyActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+        Log.d(TAG, "Mobile, meow constant is:" + Tools.MEOW);
     }
 
 
