@@ -46,7 +46,7 @@ public class UpdateService extends Service {
         }
         @Override
         protected void onPostExecute(String result) {
-            sendData(Tools.WEAR_KEY_SWEAR_TEXT, result);
+            sendData(Tools.WEAR_KEY_MEOW_TEXT, result);
 
         }
         @Override
